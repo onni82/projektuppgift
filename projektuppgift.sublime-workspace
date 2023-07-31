@@ -1,0 +1,244 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"backgr",
+				"background"
+			],
+			[
+				"back",
+				"background-size"
+			],
+			[
+				"c",
+				"contain"
+			],
+			[
+				"paddin",
+				"padding-top"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"flex",
+				"flex-flow"
+			]
+		]
+	},
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Onni/Documents/CPP/projektuppgift/test.cpp",
+		"/C/Users/Onni/Documents/CPP/projektuppgift/README.md",
+		"/C/Users/Onni/.ssh/id_rsa.pub",
+		"/D/Downloads/Minecraft/Worlds/Spigot-Bukkit start command/start_linux.sh",
+		"/D/Downloads/Minecraft/Worlds/Spigot-Bukkit start command/start.sh",
+		"/D/Downloads/Ubuntu/kk.sh",
+		"/C/Users/Onni/AppData/Local/Temp/Rar$DIa26276.35178/perc4e-FWDC5B2D_A18.txt",
+		"/M/AutoUnattend.xml",
+		"/M/BootCamp/BootCamp.xml",
+		"/C/Users/Onni/Downloads/Shutter Island.2010.BD.Rip.1080p.h264.Rus.Eng.srt",
+		"/C/Users/Onni/Downloads/mc/ankan/eula.txt",
+		"/C/Users/Onni/Downloads/mc/ankan/server.properties",
+		"/C/Users/Onni/Downloads/Driver/source.properties",
+		"/C/Users/Onni/Downloads/xiaomi_usb_driver/source.properties",
+		"/F/Dropbox/Skola/Iris komvux/Programmering 1/Inlämningsuppgifter/Inlämning 2/com.onnibucht.banksimulator.cpp",
+		"/C/Users/Onni/Downloads/Silence Of The Lambs.1991.BD.Rip.1080p.h264.6xRus.Eng/Silence Of The Lambs.1991.BD.Rip.1080p.h264.Rus.Eng.srt",
+		"/C/Users/Onni/Box Sync/Tidrapport 2023/bra att veta.txt",
+		"/C/Users/Onni/Box Sync/inlogg hos victoria.txt",
+		"/D/Music/låtar/Nexon, Wizet/MapleStory/tracks.txt",
+		"/C/Users/Onni/Desktop/The Boys.m3u8",
+		"/D/Downloads/[Games & Applications]/ArcSoft Blu-Ray.txt",
+		"/D/Downloads/[Games & Applications]/Things Texture/download.txt",
+		"/D/Downloads/[Games & Applications]/Microsoft/Autoruns/Eula.txt",
+		"/D/Downloads/[Games & Applications]/FabFilter/FabFilter Pro Q3.txt",
+		"/D/Downloads/[Games & Applications]/Blizzard/D2 backup/2022-03-05/Diablo II/default.key",
+		"/D/Downloads/[Games & Applications]/BIAS FX 2/download.txt",
+		"/D/Downloads/[Games & Applications]/Five Nights at Wario's/README!.txt",
+		"/D/Downloads/[Hacking & Leaks]/Sownage/Sony BMG Music Entertainment Belgium/Sony_BMG_Music_Entertainment_BELGIUM.txt",
+		"/D/Downloads/[Other & Mixed]/redirect.php",
+		"/D/Downloads/[Ubuntu]/kk.sh",
+		"/D/Downloads/[Ubuntu]/bak/passwords.txt",
+		"/D/Downloads/[Ubuntu]/LAMP.txt",
+		"/D/Downloads/[Ubuntu]/notes.txt",
+		"/D/Downloads/[Ubuntu]/Config Java.sh",
+		"/C/Users/Onni/cmd.bat",
+		"/C/Users/Onni/Downloads/mc/mel/server.properties",
+		"/C/Users/Onni/AppData/Local/Temp/Rar$DIa26664.47173/release_notes.txt",
+		"/C/Users/Onni/Downloads/mc/sebbe/plugins/TreeFeller/config.yml",
+		"/C/Users/Onni/Downloads/mc/sebbe/server.properties",
+		"/D/Downloads/[Minecraft]/Worlds/CA-v1.0-ServerSetup/ops.json",
+		"/C/Users/Onni/Downloads/links.txt",
+		"/C/Users/Onni/AppData/Roaming/FileZilla/recentservers.xml",
+		"/C/Users/Onni/Downloads/usb_driver/source.properties",
+		"/C/Users/Onni/Downloads/mc/marion/eula.txt",
+		"/F/Mega/New Text Document.txt",
+		"/F/OneDrive/text/members.txt",
+		"/C/Users/Onni/Downloads/A New Start.txt",
+		"/C/Users/Onni/Downloads/intensivkurs.txt",
+		"/D/Downloads/[Minecraft]/Worlds/privat/server.properties",
+		"/C/Users/Onni/AppData/Local/Temp/Rar$DIa15636.42085/» p a s s w o r d  [readme].txt",
+		"/D/Documents/stillichimiya.txt",
+		"/D/Documents/Rhett Link faith.txt",
+		"/D/Documents/Mixture.txt",
+		"/D/Documents/HUFS time periods.txt",
+		"/D/Documents/Cantonese.txt",
+		"/D/Documents/404.txt",
+		"/D/Downloads/MEGA/Korpsekitten - LKFans.com/mega.txt",
+		"/F/Dropbox/Skola/Komvux ryska/Motivation för kurs.txt",
+		"/C/Users/Onni/Downloads/SR.txt",
+		"/C/Users/Onni/Downloads/lön.txt",
+		"/C/Users/Onni/Downloads/be licensed.txt",
+		"/C/Users/Onni/Downloads/Dani google.csv",
+		"/D/Downloads/[Other & Mixed]/Accounts/battle.net/konto diablo 2.txt"
+	],
+	"find":
+	{
+		"height": 29.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/C++/C++ Single File.sublime-build",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 265.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
