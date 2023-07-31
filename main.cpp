@@ -97,6 +97,12 @@ void AddItem(vector<Item> &itemList, string nameOfItem, string effectOfItem, int
     
 }
 
+void GetItemEffect(nameOfItemToBeUsed, Entity &player) {
+    if (nameOfItemToBeUsed == "Potion") {
+        player.health += 10;
+    }
+}
+
 // funktion som startar en strid med en entitet/monster
 void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
     cout << "Initiating battle with " << monster.name << " who has " << monster.health << " HP.\n";
@@ -134,8 +140,25 @@ void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
             case 'i':
             {
                 for (int i = 0; i < inventory.size()-1; ++i) {
-                    /* code */
+                    cout << "[" << i << "] " << inventory[i].amount << inventory[i].name << "(s). " << inventory[i].effect << ".\n";
                 }
+
+                int itemToUse;
+                cin >> itemToUse;
+
+                GetItemEffect(inventory[itemToUse].name, player);
+                inventory[itemToUse].amount -= 1;
+
+                if (inventory[itemToUse].amount == 0) {
+                    inventory.erase(inventory.begin());
+                } else {
+                    inventory.erase(inventory.begin() + itemToUse);
+                }
+
+                cout << "Player " << player.name << ": " << player.health << " HP.\n";
+                cout << monster.name << ": " monster.name << "HP.\n";
+                ClearScreen();
+
                 break;
             }
             default:
