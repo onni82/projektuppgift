@@ -141,9 +141,11 @@ void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
             }
             case 'i': case 'I':
             {
-                for (int i = 0; i < itemList.size()-1; ++i) {
+                cout << "Your inventory:\n";
+                for (int i = 0; i < itemList.size(); ++i) {
                     cout << "[" << i << "] " << itemList[i].amount << itemList[i].name << "(s). " << itemList[i].effect << ".\n";
                 }
+                cout << "Your pick: ";
 
                 int itemToUse;
 
@@ -158,7 +160,7 @@ void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
                     }
 
                     cout << "Player " << player.name << ": " << player.health << " HP.\n";
-                    cout << monster.name << ": " << monster.name << "HP.\n";
+                    cout << monster.name << ": " << monster.health << "HP.\n";
                 }
                 
                 ClearScreen();
