@@ -106,59 +106,61 @@ void GetItemEffect(string nameOfItemToBeUsed, Entity &player) {
 // funktion som startar en strid med en entitet/monster
 void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
     cout << "Initiating battle with " << monster.name << " who has " << monster.health << " HP.\n";
-    cout << "Player" << player.name << " has " << player.health << " HP.\n";
+    cout << "Player " << player.name << " has " << player.health << " HP.\n";
 
     ClearScreen();
 
     char optionInBattle;
 
     while(true) {
-        cout << "What do you want to do? (A)ttack, (I)tem or (R)un?: ";
-        cin >> optionInBattle;
-        optionInBattle = tolower(optionInBattle);
-
-        if (player.health >= 0) {
+        if (player.health <= 0) {
             cout << "Player " << player.name << " died. Running away from battle.\n";
             break;
         }
-        if (monster.health >= 0) {
+        if (monster.health <= 0) {
             cout << monster.name << " died.\n";
             break;
         }
-        if (optionInBattle == 'r') {
+        cout << "What do you want to do? (A)ttack, (I)tem or (R)un?: ";
+        cin >> optionInBattle;
+        
+        if (optionInBattle == 'r' || optionInBattle == 'R') {
             cout << "Player " << player.name << " ran away from battle.\n";
             break;
         }
 
         switch(optionInBattle) {
-            case 'a':
+            case 'a': case 'A':
             {
                 cout << "Player " << player.name << " attacks " << monster.name << ".\n" << monster.name << " lost 10 HP.\n";
+                monster.health -= 10;
                 cout << "Player " << player.name << ": " << player.health << " HP.\n";
-                cout << monster.name << ": " << monster.name << "HP.\n";
+                cout << monster.name << ": " << monster.health << "HP.\n";
                 ClearScreen();
                 break;
             }
-            case 'i':
+            case 'i': case 'I':
             {
                 for (int i = 0; i < itemList.size()-1; ++i) {
                     cout << "[" << i << "] " << itemList[i].amount << itemList[i].name << "(s). " << itemList[i].effect << ".\n";
                 }
 
                 int itemToUse;
-                cin >> itemToUse;
 
-                GetItemEffect(itemList[itemToUse].name, player);
-                itemList[itemToUse].amount -= 1;
+                if (cin >> itemToUse) {
+                    GetItemEffect(itemList[itemToUse].name, player);
+                    itemList[itemToUse].amount -= 1;
 
-                if (itemList[itemToUse].amount == 0) {
-                    itemList.erase(itemList.begin());
-                } else {
-                    itemList.erase(itemList.begin() + itemToUse);
+                    if (itemList[itemToUse].amount == 0) {
+                        itemList.erase(itemList.begin());
+                    } else {
+                        itemList.erase(itemList.begin() + itemToUse);
+                    }
+
+                    cout << "Player " << player.name << ": " << player.health << " HP.\n";
+                    cout << monster.name << ": " << monster.name << "HP.\n";
                 }
-
-                cout << "Player " << player.name << ": " << player.health << " HP.\n";
-                cout << monster.name << ": " << monster.name << "HP.\n";
+                
                 ClearScreen();
 
                 break;
@@ -166,6 +168,19 @@ void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
             default:
             break;
         }
+        if (player.health <= 0) {
+            cout << "Player " << player.name << " died. Running away from battle.\n";
+            break;
+        }
+        if (monster.health <= 0) {
+            cout << monster.name << " died.\n";
+            break;
+        }
+        cout << monster.name << " attacks " << player.name << ".\n" << player.name << " lost 10 HP.\n";
+        player.health -= 10;
+        cout << "Player " << player.name << ": " << player.health << " HP.\n";
+        cout << monster.name << ": " << monster.health << "HP.\n";
+        ClearScreen();
     }
 }
 
@@ -202,6 +217,7 @@ int main(int argc, char* argv[]) {
     AddItem(inventory, "Potion", "Heals 10 HP", 5);
 
     cout << "Congratulations! You finished the game.\n";
+    ClearScreen();
 
     return 0;
 }
