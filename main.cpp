@@ -97,7 +97,7 @@ void AddItem(vector<Item> &itemList, string nameOfItem, string effectOfItem, int
     
 }
 
-void GetItemEffect(nameOfItemToBeUsed, Entity &player) {
+void GetItemEffect(string nameOfItemToBeUsed, Entity &player) {
     if (nameOfItemToBeUsed == "Potion") {
         player.health += 10;
     }
@@ -114,17 +114,19 @@ void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
 
     while(true) {
         cout << "What do you want to do? (A)ttack, (I)tem or (R)un?: ";
-        cin >> tolower(optionInBattle);
+        cin >> optionInBattle;
+        optionInBattle = tolower(optionInBattle);
 
         if (player.health >= 0) {
             cout << "Player " << player.name << " died. Running away from battle.\n";
             break;
         }
         if (monster.health >= 0) {
-            cout << monster.name << " died.\n"
+            cout << monster.name << " died.\n";
             break;
         }
-        if (optionInBattle == "r") {
+        if (optionInBattle == 'r') {
+            cout << "Player " << player.name << " ran away from battle.\n";
             break;
         }
 
@@ -133,30 +135,30 @@ void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
             {
                 cout << "Player " << player.name << " attacks " << monster.name << ".\n" << monster.name << " lost 10 HP.\n";
                 cout << "Player " << player.name << ": " << player.health << " HP.\n";
-                cout << monster.name << ": " monster.name << "HP.\n";
+                cout << monster.name << ": " << monster.name << "HP.\n";
                 ClearScreen();
                 break;
             }
             case 'i':
             {
-                for (int i = 0; i < inventory.size()-1; ++i) {
-                    cout << "[" << i << "] " << inventory[i].amount << inventory[i].name << "(s). " << inventory[i].effect << ".\n";
+                for (int i = 0; i < itemList.size()-1; ++i) {
+                    cout << "[" << i << "] " << itemList[i].amount << itemList[i].name << "(s). " << itemList[i].effect << ".\n";
                 }
 
                 int itemToUse;
                 cin >> itemToUse;
 
-                GetItemEffect(inventory[itemToUse].name, player);
-                inventory[itemToUse].amount -= 1;
+                GetItemEffect(itemList[itemToUse].name, player);
+                itemList[itemToUse].amount -= 1;
 
-                if (inventory[itemToUse].amount == 0) {
-                    inventory.erase(inventory.begin());
+                if (itemList[itemToUse].amount == 0) {
+                    itemList.erase(itemList.begin());
                 } else {
-                    inventory.erase(inventory.begin() + itemToUse);
+                    itemList.erase(itemList.begin() + itemToUse);
                 }
 
                 cout << "Player " << player.name << ": " << player.health << " HP.\n";
-                cout << monster.name << ": " monster.name << "HP.\n";
+                cout << monster.name << ": " << monster.name << "HP.\n";
                 ClearScreen();
 
                 break;
