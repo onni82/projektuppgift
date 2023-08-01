@@ -33,6 +33,9 @@ struct Item {
 struct Entity {
     string name;
     int health;
+    int level;
+    int currentXP;
+
 };
 
 // binärsökningsfunktion för structer
@@ -76,6 +79,15 @@ void ClearScreen() {
     system("cls");
 }
 
+void LevelUp(Entity &player) {
+    static const int required_experience[] = {
+        50, 100, 150, 200, 250, 300, 350, 400, 450, 500
+    };
+
+    while(player.currentXP >= required_experience[player.level])
+    ++player.level;
+}
+
 // funktion för att kunna lägga till objekt i inventory
 // argument som skrivs in i funktionens anrop är namn, effekt och antal för just det objekt man vill lägga in
 void AddItem(vector<Item> &itemList, string nameOfItem, string effectOfItem, int amountOfItem) {
@@ -104,8 +116,8 @@ void GetItemEffect(string nameOfItemToBeUsed, Entity &player) {
 }
 
 // funktion som startar en strid med en entitet/monster
-void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
-    cout << "Initiating battle with " << monster.name << " who has " << monster.health << " HP.\n";
+void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
+    cout << "Initiating battle with " << enemy.name << " who has " << enemy.health << " HP.\n";
     cout << "Player " << player.name << " has " << player.health << " HP.\n";
 
     ClearScreen();
@@ -118,7 +130,7 @@ void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
             break;
         }
         if (monster.health <= 0) {
-            cout << monster.name << " died.\n";
+            cout << enemy.name << " died.\n";
             break;
         }
         cout << "What do you want to do? (A)ttack, (I)tem or (R)un?: ";
@@ -132,10 +144,10 @@ void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
         switch(optionInBattle) {
             case 'a': case 'A':
             {
-                cout << "Player " << player.name << " attacks " << monster.name << ".\n" << monster.name << " lost 10 HP.\n";
-                monster.health -= 10;
+                cout << "Player " << player.name << " attacks " << enemy.name << ".\n" << enemy.name << " lost 10 HP.\n";
+                enemy.health -= 10;
                 cout << "Player " << player.name << ": " << player.health << " HP.\n";
-                cout << monster.name << ": " << monster.health << "HP.\n";
+                cout << enemy.name << ": " << enemy.health << "HP.\n";
                 ClearScreen();
                 break;
             }
@@ -160,7 +172,7 @@ void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
                     }
 
                     cout << "Player " << player.name << ": " << player.health << " HP.\n";
-                    cout << monster.name << ": " << monster.health << "HP.\n";
+                    cout << enemy.name << ": " << enemy.health << "HP.\n";
                 }
                 
                 ClearScreen();
@@ -174,14 +186,14 @@ void BattleEntity (Entity &player, Entity &monster, vector<Item> &itemList) {
             cout << "Player " << player.name << " died. Running away from battle.\n";
             break;
         }
-        if (monster.health <= 0) {
-            cout << monster.name << " died.\n";
+        if (enemy.health <= 0) {
+            cout << enemy.name << " died.\n";
             break;
         }
-        cout << monster.name << " attacks " << player.name << ".\n" << player.name << " lost 10 HP.\n";
+        cout << enemy.name << " attacks " << player.name << ".\n" << player.name << " lost 10 HP.\n";
         player.health -= 10;
         cout << "Player " << player.name << ": " << player.health << " HP.\n";
-        cout << monster.name << ": " << monster.health << "HP.\n";
+        cout << enemy.name << ": " << enemy.health << "HP.\n";
         ClearScreen();
     }
 }
@@ -198,6 +210,8 @@ int main(int argc, char* argv[]) {
         user.name = trim(input);
     }
     user.health = 20;
+    user.level = 0;
+    user.currentXP = 0;
 
     cout << "Hello " << user.name << ". Let's start your adventure. You start with one potion.\n";
     ClearScreen();
@@ -209,6 +223,8 @@ int main(int argc, char* argv[]) {
     Entity orc;
     orc.name = "Zug Zug the Orc";
     orc.health = 15;
+    orc.level = 0;
+    orc.currentXP = 0;
 
     BattleEntity(user, orc, inventory);
     ClearScreen();
