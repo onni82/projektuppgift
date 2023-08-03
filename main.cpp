@@ -6,12 +6,13 @@
     Koden laddas även upp på https://github.com/onni82/projektuppgift
 */
 
-#include <iostream>
-#include <string>
-#include <cctype>
-#include <vector>
-#include <stdlib.h>
-#include <conio.h>
+#include <iostream> // för att kunna använda cout och cin
+#include <string> // för att kunna använda stringvariabler
+#include <cctype> // för att kunna använda tolower()
+#include <vector> // för att kunna använda vectorarrayer
+#include <stdlib.h> // 
+#include <conio.h> // för att kunna använda getch()
+#include <algorithm> // för att kunna använda sort()
 
 using namespace std;
 
@@ -79,6 +80,13 @@ void ClearScreen() {
     system("cls");
 }
 
+//ger spelaren en mängd experience
+//första argumentet är entiteten som man vill ge experience medan det andra argumentet är mängden experience man vill ge
+void RewardExp(Entity &player, int amountOfExp) {
+    player.currentExp += amountOfExp;
+    cout << "Player " << player.name << " gained " << amountOfExp << "experience.";
+}
+
 // funktion som höjer nivån på entiteten som anges i argumentet
 // alla entiteter börjar på nivå 0, men varje nivå återges som nivå+1 i spelet för att det ska se ut som att man börjar på nivå 1
 void LevelUp(Entity &player) {
@@ -86,9 +94,10 @@ void LevelUp(Entity &player) {
         50, 100, 150, 200, 250, 300, 350, 400, 450, 500
     };
 
-    while(player.currentExp >= requiredExp[player.level])
-    ++player.level;
-    cout << player.name << " leveled up to level " << player.level+1 << ".\n";
+    while(player.currentExp >= requiredExp[player.level]) {
+        ++player.level;
+        cout << player.name << " leveled up to level " << player.level+1 << ".\n";
+    }
 }
 
 // funktion för att kunna lägga till objekt i väskan
@@ -107,7 +116,6 @@ void AddItem(vector<Item> &itemList, string nameOfItem, int amountOfItem) {
         itemList.push_back(item);
         cout << "Picked up " << amountOfItem << " " << nameOfItem << "(s).\n";
     }
-    
 }
 
 // funktion för att kunna använda objekt som finns i ens väska
@@ -156,8 +164,9 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
             cout << "Player " << player.name << " died. Running away from battle.\n";
             break;
         }
-        if (monster.health <= 0) { // kollar om monstret har dött i strid
+        if (enemy.health <= 0) { // kollar om monstret har dött i strid
             cout << enemy.name << " died.\n";
+
             break;
         }
 
@@ -191,7 +200,7 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
                 int itemToUse;
 
                 if (cin >> itemToUse) { // använder ett objekt på spelaren
-                    UseItem(itemList[itemToUse].name, player);
+                    UseItem(itemList, itemList[itemToUse].name, player);
 
                     cout << "Player " << player.name << ": " << player.health << " HP.\n";
                     cout << enemy.name << ": " << enemy.health << "HP.\n";

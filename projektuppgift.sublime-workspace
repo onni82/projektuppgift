@@ -4,16 +4,36 @@
 		"selected_items":
 		[
 			[
+				"amount",
+				"amountOfExp"
+			],
+			[
+				"amoun",
+				"amountOfExp"
+			],
+			[
+				"ene",
+				"enemyHealth"
+			],
+			[
+				"i",
+				"itemDescription"
+			],
+			[
+				"item",
+				"itemDescription"
+			],
+			[
+				"n",
+				"nameOfItem"
+			],
+			[
 				"c",
 				"currentXP"
 			],
 			[
 				"le",
 				"level"
-			],
-			[
-				"item",
-				"itemToUse"
 			],
 			[
 				"name",
@@ -97,6 +117,11 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Onni/Downloads/mc/brandon och emilio/plugins/GUIShop/config.yml",
+		"/C/Users/Onni/Downloads/mc/brandon och emilio/plugins/GUIShop/shops.yml",
+		"/C/Users/Onni/Downloads/mc/brandon och emilio/plugins/GUIShop/menu.yml",
+		"/C/Users/Onni/Downloads/mc/brandon och emilio/plugins/Essentials/config.yml",
+		"/C/Users/Onni/Downloads/mc/brandon och emilio/server.properties",
 		"/C/Users/Onni/Box Sync/Tidrapport 2023/bra att veta.txt",
 		"/C/Users/Onni/Box Sync/Tidrapport 2023/selpy.txt",
 		"/C/Users/Onni/Documents/CPP/projektuppgift/void_BattleEntity.cpp",
@@ -165,7 +190,7 @@
 	],
 	"find":
 	{
-		"height": 29.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -179,6 +204,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"menu item",
+			"menu",
+			"]'\n",
+			"binarySearch",
+			"currentXP"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -186,6 +216,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"currentExp"
 		],
 		"reverse": false,
 		"scrollbar_highlights": true,
@@ -237,7 +268,7 @@
 	"pinned_build_system": "Packages/C++/C++ Single File.sublime-build",
 	"replace":
 	{
-		"height": 54.0
+		"height": 74.0
 	},
 	"save_all_on_build": true,
 	"select_file":
