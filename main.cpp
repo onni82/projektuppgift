@@ -19,7 +19,6 @@ using namespace std;
 // name är namnet på objektet, effect är objektets effekt och amount är antalet man har av det objektet
 struct Item {
     string name;
-    string effect;
     int amount;
 
     // definierar en funktion som jämför objektets namn med det objekt man söker efter i sin väska
@@ -34,11 +33,11 @@ struct Entity {
     string name;
     int health;
     int level;
-    int currentXP;
+    int currentExp;
 
 };
 
-// binärsökningsfunktion för structer
+// binärsökningsfunktion för structobjekt
 // returnerar indexet av objektet man söker efter om det finns, annars returneras -1
 template<typename T>
 int binarySearch(const vector<T>& arr, const string& targetName, bool (*compareFunc)(const T&, const string&)) {
@@ -73,27 +72,30 @@ string trim(string input) {
     return output;
 }
 
+// funktion som ber användaren att trycka ner en knapp innan skärmen rensas
 void ClearScreen() {
     cout << "Hit a key to proceed.\n";
     getch();
     system("cls");
 }
 
+// funktion som höjer nivån på entiteten som anges i argumentet
+// alla entiteter börjar på nivå 0, men varje nivå återges som nivå+1 i spelet för att det ska se ut som att man börjar på nivå 1
 void LevelUp(Entity &player) {
-    static const int required_experience[] = {
+    static const int requiredExp[] = { // sätter mängden experience som behövs för att gå upp en nivå (ex. 50 från 0 till 1, 100 från 1 till 2)
         50, 100, 150, 200, 250, 300, 350, 400, 450, 500
     };
 
-    while(player.currentXP >= required_experience[player.level])
+    while(player.currentExp >= requiredExp[player.level])
     ++player.level;
+    cout << player.name << " leveled up to level " << player.level+1 << ".\n";
 }
 
-// funktion för att kunna lägga till objekt i inventory
+// funktion för att kunna lägga till objekt i väskan
 // argument som skrivs in i funktionens anrop är namn, effekt och antal för just det objekt man vill lägga in
-void AddItem(vector<Item> &itemList, string nameOfItem, string effectOfItem, int amountOfItem) {
+void AddItem(vector<Item> &itemList, string nameOfItem, int amountOfItem) {
+    sort(itemList.begin(), itemList.end()); // sorterar ens väska
     int result = binarySearch(itemList, nameOfItem, &Item::compareByName); // söker efter objektet i ens väska
-
-    system("cls");
 
     if (result != -1) { // om objektet hittas i väskan
         itemList[result].amount += amountOfItem;
@@ -101,7 +103,6 @@ void AddItem(vector<Item> &itemList, string nameOfItem, string effectOfItem, int
     } else { // om objektet inte hittas i väskan
         Item item;
         item.name = nameOfItem;
-        item.effect = effectOfItem;
         item.amount = amountOfItem;
         itemList.push_back(item);
         cout << "Picked up " << amountOfItem << " " << nameOfItem << "(s).\n";
@@ -109,40 +110,67 @@ void AddItem(vector<Item> &itemList, string nameOfItem, string effectOfItem, int
     
 }
 
-void GetItemEffect(string nameOfItemToBeUsed, Entity &player) {
-    if (nameOfItemToBeUsed == "Potion") {
-        player.health += 10;
+// funktion för att kunna använda objekt som finns i ens väska
+// argumenten är den array man vill uppdatera efter användning av objekt, namnet på objektet och den entitet som objektet ska påverka
+void UseItem(vector<Item> &itemList, string nameOfItem, Entity &player) {
+    sort(itemList.begin(), itemList.end()); // sorterar ens väska
+    int result = binarySearch(itemList, nameOfItem, &Item::compareByName); // söker efter objektet i ens väska
+
+    if (result != -1) { // om objektet hittas i väskan
+        if (nameOfItem == "Potion") {
+            player.health += 10;
+        }
+        itemList[result].amount -= 1;
+
+        if (itemList[result].amount == 0) {
+            itemList.erase(itemList.begin());
+        } else {
+            itemList.erase(itemList.begin() + result);
+        }
+        cout << "Used " << nameOfItem << " on " << player.name << ".\n";
     }
+}
+
+// funktion som berättar vad ett objekt (som kan finnas i väskan) ger för effekt vid användning
+string GetItemDescription(string nameOfItem) {
+    string itemDescription;
+    if (nameOfItem == "Potion") {
+        itemDescription == "Heals 10 HP";
+    } else {
+        itemDescription == "No description";
+    }
+    return itemDescription;
 }
 
 // funktion som startar en strid med en entitet/monster
 void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
-    cout << "Initiating battle with " << enemy.name << " who has " << enemy.health << " HP.\n";
-    cout << "Player " << player.name << " has " << player.health << " HP.\n";
+    cout << "Initiating battle with level " << enemy.level+1 << " " << enemy.name << " who has " << enemy.health << " HP.\n";
+    cout << "Level " << player.level+1 << " player " << player.name << " has " << player.health << " HP.\n";
 
     ClearScreen();
 
-    char optionInBattle;
+    char optionInBattle; // variabel för menyval i strid
 
     while(true) {
-        if (player.health <= 0) {
+        if (player.health <= 0) { // kollar om spelaren har dött i strid
             cout << "Player " << player.name << " died. Running away from battle.\n";
             break;
         }
-        if (monster.health <= 0) {
+        if (monster.health <= 0) { // kollar om monstret har dött i strid
             cout << enemy.name << " died.\n";
             break;
         }
+
         cout << "What do you want to do? (A)ttack, (I)tem or (R)un?: ";
         cin >> optionInBattle;
         
-        if (optionInBattle == 'r' || optionInBattle == 'R') {
+        if (optionInBattle == 'r' || optionInBattle == 'R') { // springer från striden
             cout << "Player " << player.name << " ran away from battle.\n";
             break;
         }
 
-        switch(optionInBattle) {
-            case 'a': case 'A':
+        switch(optionInBattle) { // kollar valet under striden
+            case 'a': case 'A': // när man attackerar under striden
             {
                 cout << "Player " << player.name << " attacks " << enemy.name << ".\n" << enemy.name << " lost 10 HP.\n";
                 enemy.health -= 10;
@@ -151,25 +179,19 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
                 ClearScreen();
                 break;
             }
-            case 'i': case 'I':
+            case 'i': case 'I': // när man använder ett objekt under striden
             {
                 cout << "Your inventory:\n";
-                for (int i = 0; i < itemList.size(); ++i) {
-                    cout << "[" << i << "] " << itemList[i].amount << itemList[i].name << "(s). " << itemList[i].effect << ".\n";
+                sort(itemList.begin(), itemList.end()); // sorterar ens väska
+                for (int i = 0; i < itemList.size(); ++i) { // skriver ut varje objekt i ens väska
+                    cout << "[" << i << "] " << itemList[i].amount << itemList[i].name << "(s). " << GetItemDescription(itemList[i].name) << ".\n";
                 }
                 cout << "Your pick: ";
 
                 int itemToUse;
 
-                if (cin >> itemToUse) {
-                    GetItemEffect(itemList[itemToUse].name, player);
-                    itemList[itemToUse].amount -= 1;
-
-                    if (itemList[itemToUse].amount == 0) {
-                        itemList.erase(itemList.begin());
-                    } else {
-                        itemList.erase(itemList.begin() + itemToUse);
-                    }
+                if (cin >> itemToUse) { // använder ett objekt på spelaren
+                    UseItem(itemList[itemToUse].name, player);
 
                     cout << "Player " << player.name << ": " << player.health << " HP.\n";
                     cout << enemy.name << ": " << enemy.health << "HP.\n";
@@ -182,11 +204,11 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
             default:
             break;
         }
-        if (player.health <= 0) {
+        if (player.health <= 0) { // kollar om spelaren har dött i strid
             cout << "Player " << player.name << " died. Running away from battle.\n";
             break;
         }
-        if (enemy.health <= 0) {
+        if (enemy.health <= 0) { // kollar om monstret har dött i strid
             cout << enemy.name << " died.\n";
             break;
         }
@@ -209,22 +231,23 @@ int main(int argc, char* argv[]) {
         getline(cin, input);
         user.name = trim(input);
     }
+    
     user.health = 20;
     user.level = 0;
-    user.currentXP = 0;
+    user.currentExp = 0;
 
     cout << "Hello " << user.name << ". Let's start your adventure. You start with one potion.\n";
     ClearScreen();
 
     vector<Item> inventory = {
-        {"Potion", "Heals 10 HP", 1}
+        {"Potion", 1}
     };
 
     Entity orc;
     orc.name = "Zug Zug the Orc";
-    orc.health = 15;
+    orc.health = 25;
     orc.level = 0;
-    orc.currentXP = 0;
+    orc.currentExp = 0;
 
     BattleEntity(user, orc, inventory);
     ClearScreen();
@@ -232,7 +255,18 @@ int main(int argc, char* argv[]) {
     cout << "You enter a big forest. There's a big bush. You check the bush.\n";
     ClearScreen();
 
-    AddItem(inventory, "Potion", "Heals 10 HP", 5);
+    AddItem(inventory, "Potion", 5);
+    cout << "As you walk further into the forest, you get ambushed by the Elven King and his army.\n";
+    ClearScreen();
+
+    Entity elf;
+    orc.name = "Elven King";
+    orc.health = 25;
+    orc.level = 0;
+    orc.currentExp = 0;
+
+    BattleEntity(user, orc, inventory);
+    ClearScreen();
 
     cout << "Congratulations! You finished the game.\n";
     ClearScreen();

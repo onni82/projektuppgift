@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"c",
+				"currentXP"
+			],
+			[
+				"le",
+				"level"
+			],
+			[
 				"item",
 				"itemToUse"
 			],
@@ -22,10 +30,6 @@
 			[
 				"back",
 				"background-size"
-			],
-			[
-				"c",
-				"contain"
 			],
 			[
 				"paddin",
@@ -93,6 +97,9 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Onni/Box Sync/Tidrapport 2023/bra att veta.txt",
+		"/C/Users/Onni/Box Sync/Tidrapport 2023/selpy.txt",
+		"/C/Users/Onni/Documents/CPP/projektuppgift/void_BattleEntity.cpp",
 		"/C/Users/Onni/Documents/CPP/projektuppgift/test.cpp",
 		"/C/Users/Onni/Documents/CPP/projektuppgift/README.md",
 		"/C/Users/Onni/.ssh/id_rsa.pub",
@@ -109,7 +116,6 @@
 		"/C/Users/Onni/Downloads/xiaomi_usb_driver/source.properties",
 		"/F/Dropbox/Skola/Iris komvux/Programmering 1/Inlämningsuppgifter/Inlämning 2/com.onnibucht.banksimulator.cpp",
 		"/C/Users/Onni/Downloads/Silence Of The Lambs.1991.BD.Rip.1080p.h264.6xRus.Eng/Silence Of The Lambs.1991.BD.Rip.1080p.h264.Rus.Eng.srt",
-		"/C/Users/Onni/Box Sync/Tidrapport 2023/bra att veta.txt",
 		"/C/Users/Onni/Box Sync/inlogg hos victoria.txt",
 		"/D/Music/låtar/Nexon, Wizet/MapleStory/tracks.txt",
 		"/C/Users/Onni/Desktop/The Boys.m3u8",
