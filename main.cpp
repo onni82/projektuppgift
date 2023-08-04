@@ -10,7 +10,7 @@
 #include <string> // för att kunna använda stringvariabler
 #include <cctype> // för att kunna använda tolower()
 #include <vector> // för att kunna använda vectorarrayer
-#include <stdlib.h> // 
+#include <stdlib.h> //
 #include <conio.h> // för att kunna använda getch()
 #include <algorithm> // för att kunna använda sort()
 
@@ -27,6 +27,13 @@ struct Item {
         return p.name < targetName;
     }
 };
+
+// denna funktion används för att jämföra objekt i ens väska när man ska sortera väskan
+bool compareItems(const Item& a, const Item& b) {
+    if (a.name != b.name) {
+        return a.name < b.name;
+    }
+}
 
 // denna struct kan skapa en entitet/monster som man möter
 // name är namnet på objektet och health är antalet hit points (HP) som objektet har
@@ -63,13 +70,13 @@ int binarySearch(const vector<T>& arr, const string& targetName, bool (*compareF
 // funktion för att trimma strängvariabler för att inte innehålla nya rader
 string trim(string input) {
     string output;
-    
+
     for (char ch : input) {
         if (ch == '\n' || ch == '\r')
             continue;
         output += ch;
     }
-    
+
     return output;
 }
 
@@ -103,7 +110,6 @@ void LevelUp(Entity &player) {
 // funktion för att kunna lägga till objekt i väskan
 // argument som skrivs in i funktionens anrop är namn, effekt och antal för just det objekt man vill lägga in
 void AddItem(vector<Item> &itemList, string nameOfItem, int amountOfItem) {
-    sort(itemList.begin(), itemList.end()); // sorterar ens väska
     int result = binarySearch(itemList, nameOfItem, &Item::compareByName); // söker efter objektet i ens väska
 
     if (result != -1) { // om objektet hittas i väskan
@@ -121,7 +127,6 @@ void AddItem(vector<Item> &itemList, string nameOfItem, int amountOfItem) {
 // funktion för att kunna använda objekt som finns i ens väska
 // argumenten är den array man vill uppdatera efter användning av objekt, namnet på objektet och den entitet som objektet ska påverka
 void UseItem(vector<Item> &itemList, string nameOfItem, Entity &player) {
-    sort(itemList.begin(), itemList.end()); // sorterar ens väska
     int result = binarySearch(itemList, nameOfItem, &Item::compareByName); // söker efter objektet i ens väska
 
     if (result != -1) { // om objektet hittas i väskan
@@ -172,7 +177,7 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
 
         cout << "What do you want to do? (A)ttack, (I)tem or (R)un?: ";
         cin >> optionInBattle;
-        
+
         if (optionInBattle == 'r' || optionInBattle == 'R') { // springer från striden
             cout << "Player " << player.name << " ran away from battle.\n";
             break;
@@ -191,8 +196,9 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
             case 'i': case 'I': // när man använder ett objekt under striden
             {
                 cout << "Your inventory:\n";
-                sort(itemList.begin(), itemList.end()); // sorterar ens väska
-                for (int i = 0; i < itemList.size(); ++i) { // skriver ut varje objekt i ens väska
+                //sort(itemList.begin(), itemList.end()); // sorterar ens väska
+                //for (int i = 0; i < itemList.size(); ++i) { // skriver ut varje objekt i ens väska
+                for (unsigned i = 0; i < itemList.size(); ++i) { // skriver ut varje objekt i ens väska
                     cout << "[" << i << "] " << itemList[i].amount << itemList[i].name << "(s). " << GetItemDescription(itemList[i].name) << ".\n";
                 }
                 cout << "Your pick: ";
@@ -200,12 +206,13 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
                 int itemToUse;
 
                 if (cin >> itemToUse) { // använder ett objekt på spelaren
+                    //sort(itemList.begin(), itemList.end());
                     UseItem(itemList, itemList[itemToUse].name, player);
 
                     cout << "Player " << player.name << ": " << player.health << " HP.\n";
                     cout << enemy.name << ": " << enemy.health << "HP.\n";
                 }
-                
+
                 ClearScreen();
 
                 break;
@@ -240,7 +247,7 @@ int main(int argc, char* argv[]) {
         getline(cin, input);
         user.name = trim(input);
     }
-    
+
     user.health = 20;
     user.level = 0;
     user.currentExp = 0;
@@ -258,6 +265,7 @@ int main(int argc, char* argv[]) {
     orc.level = 0;
     orc.currentExp = 0;
 
+    sort(inventory.begin(), inventory.end(), compareItems); // sorterar ens väska
     BattleEntity(user, orc, inventory);
     ClearScreen();
 
@@ -265,6 +273,7 @@ int main(int argc, char* argv[]) {
     ClearScreen();
 
     AddItem(inventory, "Potion", 5);
+    sort(inventory.begin(), inventory.end(), compareItems); // sorterar ens väska
     cout << "As you walk further into the forest, you get ambushed by the Elven King and his army.\n";
     ClearScreen();
 
@@ -274,6 +283,7 @@ int main(int argc, char* argv[]) {
     orc.level = 0;
     orc.currentExp = 0;
 
+    sort(inventory.begin(), inventory.end(), compareStruct); // sorterar ens väska
     BattleEntity(user, orc, inventory);
     ClearScreen();
 
