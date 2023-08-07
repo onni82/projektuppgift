@@ -91,7 +91,7 @@ void ClearScreen() {
 //första argumentet är entiteten som man vill ge experience medan det andra argumentet är mängden experience man vill ge
 void RewardExp(Entity &player, int amountOfExp) {
     player.currentExp += amountOfExp;
-    cout << "Player " << player.name << " gained " << amountOfExp << "experience.";
+    cout << "Player " << player.name << " gained " << amountOfExp << " experience.\n";
 }
 
 // funktion som höjer nivån på entiteten som anges i argumentet
@@ -131,15 +131,15 @@ void UseItem(vector<Item> &itemList, string nameOfItem, Entity &player) {
 
     if (result != -1) { // om objektet hittas i väskan
         if (nameOfItem == "Potion") {
-            player.health += 10;
+            player.health += 15;
         }
+
         itemList[result].amount -= 1;
 
         if (itemList[result].amount == 0) {
-            itemList.erase(itemList.begin());
-        } else {
             itemList.erase(itemList.begin() + result);
         }
+
         cout << "Used " << nameOfItem << " on " << player.name << ".\n";
     }
 }
@@ -148,9 +148,9 @@ void UseItem(vector<Item> &itemList, string nameOfItem, Entity &player) {
 string GetItemDescription(string nameOfItem) {
     string itemDescription;
     if (nameOfItem == "Potion") {
-        itemDescription == "Heals 10 HP";
+        itemDescription = "Heals 15 HP";
     } else {
-        itemDescription == "No description";
+        itemDescription = "No description";
     }
     return itemDescription;
 }
@@ -171,7 +171,8 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
         }
         if (enemy.health <= 0) { // kollar om monstret har dött i strid
             cout << enemy.name << " died.\n";
-
+            RewardExp(player, enemy.level+1 * 15); // ge spelaren experience (= monstrets level * 15)
+            LevelUp(player);
             break;
         }
 
@@ -199,7 +200,7 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
                 //sort(itemList.begin(), itemList.end()); // sorterar ens väska
                 //for (int i = 0; i < itemList.size(); ++i) { // skriver ut varje objekt i ens väska
                 for (unsigned i = 0; i < itemList.size(); ++i) { // skriver ut varje objekt i ens väska
-                    cout << "[" << i << "] " << itemList[i].amount << itemList[i].name << "(s). " << GetItemDescription(itemList[i].name) << ".\n";
+                    cout << "[" << i << "] " << itemList[i].amount << " " << itemList[i].name << "(s). " << GetItemDescription(itemList[i].name) << ".\n";
                 }
                 cout << "Your pick: ";
 
@@ -226,6 +227,8 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
         }
         if (enemy.health <= 0) { // kollar om monstret har dött i strid
             cout << enemy.name << " died.\n";
+            RewardExp(player, enemy.level+1 * 15); // ge spelaren experience (= monstrets level * 15)
+            LevelUp(player);
             break;
         }
         cout << enemy.name << " attacks " << player.name << ".\n" << player.name << " lost 10 HP.\n";
@@ -256,7 +259,7 @@ int main(int argc, char* argv[]) {
     ClearScreen();
 
     vector<Item> inventory = {
-        {"Potion", 1}
+        {"Potion", 2}
     };
 
     Entity orc;
@@ -283,7 +286,7 @@ int main(int argc, char* argv[]) {
     orc.level = 0;
     orc.currentExp = 0;
 
-    sort(inventory.begin(), inventory.end(), compareStruct); // sorterar ens väska
+    sort(inventory.begin(), inventory.end(), compareItems); // sorterar ens väska
     BattleEntity(user, orc, inventory);
     ClearScreen();
 

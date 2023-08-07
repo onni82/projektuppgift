@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1691439442 source:c:\users\onni\documents\cpp\projektuppgift\main.cpp
+	<iostream>
+	<string>
+	<cctype>
+	<vector>
+	<stdlib.h>
+	<conio.h>
+	<algorithm>
+

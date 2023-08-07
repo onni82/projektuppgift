@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"Lvel",
+				"LevelUp"
+			],
+			[
 				"amount",
 				"amountOfExp"
 			],
@@ -117,6 +121,7 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Onni/Documents/CPP/projektuppgift/main.cpp",
 		"/C/Users/Onni/Downloads/mc/brandon och emilio/plugins/GUIShop/config.yml",
 		"/C/Users/Onni/Downloads/mc/brandon och emilio/plugins/GUIShop/shops.yml",
 		"/C/Users/Onni/Downloads/mc/brandon och emilio/plugins/GUIShop/menu.yml",
@@ -259,7 +264,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 138.0
+		"height": 314.0
 	},
 	"output.find_results":
 	{
