@@ -114,13 +114,23 @@ void AddItem(vector<Item> &itemList, string nameOfItem, int amountOfItem) {
 
     if (result != -1) { // om objektet hittas i väskan
         itemList[result].amount += amountOfItem;
-        cout << "Picked up " << amountOfItem << " " << nameOfItem << "(s). Now a total of " << itemList[result].amount << ".\n";
+        if (amountOfItem > 1) {
+            cout << "Picked up " << amountOfItem << " " << nameOfItem << "s. Now a total of " << itemList[result].amount << ".\n";
+        } else {
+            cout << "Picked up " << amountOfItem << " " << nameOfItem << ". Now a total of " << itemList[result].amount << ".\n";
+        }
     } else { // om objektet inte hittas i väskan
         Item item;
         item.name = nameOfItem;
         item.amount = amountOfItem;
         itemList.push_back(item);
-        cout << "Picked up " << amountOfItem << " " << nameOfItem << "(s).\n";
+        cout << "Picked up " << amountOfItem << " " << nameOfItem;
+
+        if (amountOfItem > 1) {
+             cout << "s";
+        }
+
+        cout << ".\n";
     }
 }
 
@@ -148,7 +158,7 @@ void UseItem(vector<Item> &itemList, string nameOfItem, Entity &player) {
 string GetItemDescription(string nameOfItem) {
     string itemDescription;
     if (nameOfItem == "Potion") {
-        itemDescription = "Heals 15 HP";
+        itemDescription = "Heals 15 HP per item";
     } else {
         itemDescription = "No description";
     }
@@ -200,7 +210,11 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
                 //sort(itemList.begin(), itemList.end()); // sorterar ens väska
                 //for (int i = 0; i < itemList.size(); ++i) { // skriver ut varje objekt i ens väska
                 for (unsigned i = 0; i < itemList.size(); ++i) { // skriver ut varje objekt i ens väska
-                    cout << "[" << i << "] " << itemList[i].amount << " " << itemList[i].name << "(s). " << GetItemDescription(itemList[i].name) << ".\n";
+                    cout << "[" << i << "] " << itemList[i].amount << " " << itemList[i].name;
+                    if (itemList[i].amount > 1){
+                        cout << "s";
+                    }
+                    cout << ". " << GetItemDescription(itemList[i].name) << ".\n";
                 }
                 cout << "Your pick: ";
 
@@ -255,7 +269,7 @@ int main(int argc, char* argv[]) {
     user.level = 0;
     user.currentExp = 0;
 
-    cout << "Hello " << user.name << ". Let's start your adventure. You start with one potion.\n";
+    cout << "Hello " << user.name << ". Let's start your adventure. You start with two potions.\n";
     ClearScreen();
 
     vector<Item> inventory = {
