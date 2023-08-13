@@ -11,7 +11,7 @@
 #include <cctype> // för att kunna använda tolower()
 #include <vector> // för att kunna använda vectorarrayer
 #include <stdlib.h> //
-#include <conio.h> // för att kunna använda getch()
+#include <conio.h> // för att kunna använda getch(). detta bibliotek fungerar endast på Windows. använd ncurses på Linux/macOS eller annan unix-like
 #include <algorithm> // för att kunna använda sort()
 
 using namespace std;
