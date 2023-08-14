@@ -212,6 +212,10 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
             {
                 if (itemList.size() == 0) {
                     cout << "You have no items in your inventory.\n";
+                    cout << "Player " << player.name << " attacks " << enemy.name << ".\n" << enemy.name << " lost 10 HP.\n";
+                    enemy.health -= (player.level+1)*10;
+                    cout << "Player " << player.name << ": " << player.health << " HP.\n";
+                    cout << enemy.name << ": " << enemy.health << "HP.\n";
                     ClearScreen();
                     break;
                 }
