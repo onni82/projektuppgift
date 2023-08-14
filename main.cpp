@@ -10,8 +10,9 @@
 #include <string> // för att kunna använda stringvariabler
 #include <cctype> // för att kunna använda tolower()
 #include <vector> // för att kunna använda vectorarrayer
-#include <stdlib.h> //
-#include <conio.h> // för att kunna använda getch(). detta bibliotek fungerar endast på Windows. använd ncurses på Linux/macOS eller annan unix-like
+#include <stdlib.h> // för att kunna använda system("cls")
+//#include <conio.h> // för att kunna använda getch() på Windows
+#include <ncurses.h> // för att kunna använda getch() på Linux/macOS eller annan Unix-like
 #include <algorithm> // för att kunna använda sort()
 
 using namespace std;
@@ -30,9 +31,7 @@ struct Item {
 
 // denna funktion används för att jämföra objekt i ens väska när man ska sortera väskan
 bool compareItems(const Item& a, const Item& b) {
-    if (a.name != b.name) {
-        return a.name < b.name;
-    }
+    return a.name < b.name;
 }
 
 // denna struct kan skapa en entitet/monster som man möter
@@ -71,7 +70,7 @@ int binarySearch(const vector<T>& arr, const string& targetName, bool (*compareF
 string trim(string input) {
     string output;
 
-    for (char ch : input) {
+    for (char ch : input) { // behöver c++11 för a kompilera
         if (ch == '\n' || ch == '\r')
             continue;
         output += ch;
@@ -83,8 +82,10 @@ string trim(string input) {
 // funktion som ber användaren att trycka ner en knapp innan skärmen rensas
 void ClearScreen() {
     cout << "Hit a key to proceed.\n";
-    getch();
-    system("cls");
+    //getch();
+    getchar();
+    //system("cls"); // windows
+    system("clear");
 }
 
 //ger spelaren en mängd experience
@@ -272,7 +273,7 @@ int main(int argc, char* argv[]) {
     cout << "Hello " << user.name << ". Let's start your adventure. You start with two potions.\n";
     ClearScreen();
 
-    vector<Item> inventory = {
+    vector<Item> inventory = { // behöver c++11 för a kompilera
         {"Potion", 2}
     };
 
