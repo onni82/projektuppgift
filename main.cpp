@@ -11,7 +11,7 @@
 #include <cctype> // för att kunna använda tolower()
 #include <vector> // för att kunna använda vectorarrayer
 #include <stdlib.h> // för att kunna använda system("cls")
-#include <conio.h> // för att kunna använda getch() på Windows
+//#include <conio.h> // för att kunna använda getch() på Windows
 #include <algorithm> // för att kunna använda sort()
 
 using namespace std;
@@ -81,10 +81,10 @@ string trim(string input) {
 // funktion som ber användaren att trycka ner en knapp innan skärmen rensas
 void ClearScreen() {
     cout << "Hit a key to proceed.\n";
-    getch(); // funktion som läser av knapptryck på Windows
-    //getchar(); // liknar ovanstående kommando, dock krävs ett tryck av returknappen
-    system("cls"); // rensar terminalen på Windows
-    //system("clear"); // macOS motsvarighet till ovanstående kommando
+    //getch(); // funktion som läser av knapptryck på Windows
+    getchar(); // liknar ovanstående kommando, dock krävs ett tryck av returknappen
+    //system("cls"); // rensar terminalen på Windows
+    system("clear"); // macOS motsvarighet till ovanstående kommando
 }
 
 //ger spelaren en mängd experience
@@ -142,15 +142,17 @@ void UseItem(vector<Item> &itemList, string nameOfItem, Entity &player) {
     if (result != -1) { // om objektet hittas i väskan
         if (nameOfItem == "Potion") {
             player.health += 15;
+        } else if (nameOfItem == "Greater Potion") {
+            player.health += 25;
         }
 
         itemList[result].amount -= 1;
 
+        cout << "Used " << nameOfItem << " on " << player.name << ".\n";
+
         if (itemList[result].amount == 0) {
             itemList.erase(itemList.begin() + result);
-        }
-
-        cout << "Used " << nameOfItem << " on " << player.name << ".\n";
+        }        
     }
 }
 
@@ -159,6 +161,8 @@ string GetItemDescription(string nameOfItem) {
     string itemDescription;
     if (nameOfItem == "Potion") {
         itemDescription = "Heals 15 HP per item";
+    } else if (nameOfItem == "Greater Potion") {
+        itemDescription = "Heals 25 HP per item";
     } else {
         itemDescription = "No description";
     }
@@ -181,7 +185,7 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
         }
         if (enemy.health <= 0) { // kollar om monstret har dött i strid
             cout << enemy.name << " died.\n";
-            RewardExp(player, enemy.level+1 * 15); // ge spelaren experience (= monstrets level * 15)
+            RewardExp(player, (enemy.level+1) * 15); // ge spelaren experience (= monstrets level * 15)
             LevelUp(player);
             break;
         }
@@ -206,6 +210,12 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
             }
             case 'i': case 'I': // när man använder ett objekt under striden
             {
+                if (itemList.size() == 0) {
+                    cout << "You have no items in your inventory.\n";
+                    ClearScreen();
+                    break;
+                }
+
                 cout << "Your inventory:\n";
                 //sort(itemList.begin(), itemList.end()); // sorterar ens väska
                 //for (int i = 0; i < itemList.size(); ++i) { // skriver ut varje objekt i ens väska
@@ -241,7 +251,7 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
         }
         if (enemy.health <= 0) { // kollar om monstret har dött i strid
             cout << enemy.name << " died.\n";
-            RewardExp(player, enemy.level+1 * 15); // ge spelaren experience (= monstrets level * 15)
+            RewardExp(player, (enemy.level+1) * 15); // ge spelaren experience (= monstrets level * 15)
             LevelUp(player);
             break;
         }
@@ -304,8 +314,8 @@ int main(int argc, char* argv[]) {
     BattleEntity(user, elf, inventory);
     ClearScreen();
 
-    cout << "After facing the Elven King you noticed he dropped 10 potions.\n";
-    AddItem(inventory, "Potion", 10);
+    cout << "After facing the Elven King you noticed he dropped 10 greater potions.\n";
+    AddItem(inventory, "Greater Potion", 10);
     sort(inventory.begin(), inventory.end(), compareItems); // sorterar ens väska
     ClearScreen();
 
