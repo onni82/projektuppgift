@@ -11,7 +11,7 @@
 #include <cctype> // för att kunna använda tolower()
 #include <vector> // för att kunna använda vectorarrayer
 #include <stdlib.h> // för att kunna använda system("cls")
-//#include <conio.h> // för att kunna använda getch() på Windows
+#include <conio.h> // för att kunna använda getch() på Windows
 #include <algorithm> // för att kunna använda sort()
 
 using namespace std;
@@ -81,10 +81,10 @@ string trim(string input) {
 // funktion som ber användaren att trycka ner en knapp innan skärmen rensas
 void ClearScreen() {
     cout << "Hit a key to proceed.\n";
-    //getch();
-    getchar();
-    //system("cls"); // windows
-    system("clear");
+    getch(); // funktion som läser av knapptryck på Windows
+    //getchar(); // liknar ovanstående kommando, dock krävs ett tryck av returknappen
+    system("cls"); // rensar terminalen på Windows
+    //system("clear"); // macOS motsvarighet till ovanstående kommando
 }
 
 //ger spelaren en mängd experience
@@ -198,7 +198,7 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
             case 'a': case 'A': // när man attackerar under striden
             {
                 cout << "Player " << player.name << " attacks " << enemy.name << ".\n" << enemy.name << " lost 10 HP.\n";
-                enemy.health -= 10;
+                enemy.health -= (player.level+1)*10;
                 cout << "Player " << player.name << ": " << player.health << " HP.\n";
                 cout << enemy.name << ": " << enemy.health << "HP.\n";
                 ClearScreen();
@@ -246,7 +246,7 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
             break;
         }
         cout << enemy.name << " attacks " << player.name << ".\n" << player.name << " lost 10 HP.\n";
-        player.health -= 10;
+        player.health -= (enemy.level+1)*10;
         cout << "Player " << player.name << ": " << player.health << " HP.\n";
         cout << enemy.name << ": " << enemy.health << "HP.\n";
         ClearScreen();
@@ -286,7 +286,7 @@ int main(int argc, char* argv[]) {
     BattleEntity(user, orc, inventory);
     ClearScreen();
 
-    cout << "You enter a big forest. There's a big bush. You check the bush.\n";
+    cout << "You enter a big forest. There's a big bush. You checked the bush and found something.\n";
     ClearScreen();
 
     AddItem(inventory, "Potion", 5);
@@ -295,13 +295,31 @@ int main(int argc, char* argv[]) {
     ClearScreen();
 
     Entity elf;
-    orc.name = "Elven King";
-    orc.health = 25;
-    orc.level = 0;
-    orc.currentExp = 0;
+    elf.name = "Elven King";
+    elf.health = 25;
+    elf.level = 0;
+    elf.currentExp = 0;
 
     sort(inventory.begin(), inventory.end(), compareItems); // sorterar ens väska
-    BattleEntity(user, orc, inventory);
+    BattleEntity(user, elf, inventory);
+    ClearScreen();
+
+    cout << "After facing the Elven King you noticed he dropped 10 potions.\n";
+    AddItem(inventory, "Potion", 10);
+    sort(inventory.begin(), inventory.end(), compareItems); // sorterar ens väska
+    ClearScreen();
+
+    cout << "You feel like resting by a tree, but you notice it seems alive, like it can talk.\n";
+    ClearScreen();
+
+    Entity ent;
+    ent.name = "Ent";
+    ent.health = 30;
+    ent.level = 1;
+    ent.currentExp = 0;
+
+    sort(inventory.begin(), inventory.end(), compareItems); // sorterar ens väska
+    BattleEntity(user, ent, inventory);
     ClearScreen();
 
     cout << "Congratulations! You finished the game.\n";
