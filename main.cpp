@@ -12,7 +12,6 @@
 #include <vector> // för att kunna använda vectorarrayer
 #include <stdlib.h> // för att kunna använda system("cls")
 //#include <conio.h> // för att kunna använda getch() på Windows
-#include <ncurses.h> // för att kunna använda getch() på Linux/macOS eller annan Unix-like
 #include <algorithm> // för att kunna använda sort()
 
 using namespace std;
@@ -273,7 +272,7 @@ int main(int argc, char* argv[]) {
     cout << "Hello " << user.name << ". Let's start your adventure. You start with two potions.\n";
     ClearScreen();
 
-    vector<Item> inventory = { // behöver c++11 för a kompilera
+    vector<Item> inventory = { // behöver c++11 för att kompilera
         {"Potion", 2}
     };
 
