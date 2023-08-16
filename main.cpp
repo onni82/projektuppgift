@@ -64,6 +64,20 @@ int binarySearch(const vector<T>& arr, const string& targetName, bool (*compareF
 
     return -1; // objektet hittades inte
 }
+/*pseudokod för ovanstående kod:
+left = 0
+right = array size -1
+
+WHILE left <= right
+    mid = left + (right - left) / 2
+
+    IF array[mid] < key
+        left = mid + 1
+    ELSE IF array[mid] > key
+        right = mid -1
+    ELSE return mid
+    END IF
+END WHILE*/
 
 // funktion för att trimma strängvariabler för att inte innehålla nya rader
 string trim(string input) {
@@ -278,6 +292,11 @@ int main(int argc, char* argv[]) {
         getline(cin, input);
         user.name = trim(input);
     }
+/*  pseudokod för ovanstående kod:
+    IF program arguments > 1 THEN
+    player name = argument[1]
+    ELSE player name = input from user
+    END IF*/
 
     user.health = 20; // sätter spelarens hit points
     user.level = 0; // sätter spelarens nivå
