@@ -73,9 +73,6 @@
 			]
 		]
 	},
-	"buffers":
-	[
-	],
 	"build_system": "Packages/User/C++11.sublime-build",
 	"build_system_choices":
 	[
@@ -146,10 +143,6 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/Users/onni/Documents/CPP/projektuppgift"
-	],
 	"file_history":
 	[
 		"/Users/onni/Documents/CPP/projektuppgift/main.cpp",
@@ -267,17 +260,9 @@
 		"whole_word": false,
 		"wrap": true
 	},
-	"groups":
-	[
-		{
-			"sheets":
-			[
-			]
-		}
-	],
 	"incremental_find":
 	{
-		"height": 24.0
+		"height": 29.0
 	},
 	"input":
 	{
@@ -314,11 +299,10 @@
 	{
 		"height": 0.0
 	},
-	"pinned_build_system": "Packages/User/C++11.sublime-build",
-	"project": "projektuppgift.sublime-project",
+	"pinned_build_system": "Packages/C++/C++ Single File.sublime-build",
 	"replace":
 	{
-		"height": 44.0
+		"height": 54.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -348,7 +332,6 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
 	"settings":
 	{
 	},

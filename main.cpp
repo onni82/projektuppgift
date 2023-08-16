@@ -120,13 +120,13 @@ void AddItem(vector<Item> &itemList, string nameOfItem, int amountOfItem) {
             cout << "Picked up " << amountOfItem << " " << nameOfItem << ". Now a total of " << itemList[result].amount << ".\n";
         }
     } else { // om objektet inte hittas i väskan
-        Item item;
+        Item item; // skapar ett nytt objekt
         item.name = nameOfItem;
         item.amount = amountOfItem;
-        itemList.push_back(item);
+        itemList.push_back(item); // lägger till objektet i ens väska
         cout << "Picked up " << amountOfItem << " " << nameOfItem;
 
-        if (amountOfItem > 1) {
+        if (amountOfItem > 1) { // lägger till ett s i slutet på objektets namn om det är fler än en
              cout << "s";
         }
 
@@ -150,8 +150,8 @@ void UseItem(vector<Item> &itemList, string nameOfItem, Entity &player) {
 
         cout << "Used " << nameOfItem << " on " << player.name << ".\n";
 
-        if (itemList[result].amount == 0) {
-            itemList.erase(itemList.begin() + result);
+        if (itemList[result].amount == 0) { // kollar om det är noll i antal av objektet
+            itemList.erase(itemList.begin() + result); // tar bort objektet från väskan
         }
     }
 }
@@ -210,7 +210,7 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
             }
             case 'i': case 'I': // när man använder ett objekt under striden
             {
-                if (itemList.size() == 0) {
+                if (itemList.size() == 0) { // går automatiskt till attack om det inte finns några objekt i väskan
                     cout << "You have no items in your inventory.\n";
                     cout << "Player " << player.name << " attacks " << enemy.name << ".\n" << enemy.name << " lost 10 HP.\n";
                     enemy.health -= (player.level+1)*10;
@@ -268,20 +268,20 @@ void BattleEntity (Entity &player, Entity &enemy, vector<Item> &itemList) {
 }
 
 int main(int argc, char* argv[]) {
-    Entity user;
+    Entity user; // skapar spelaren som ett objekt av entitystructen
 
-    if (argc > 1) {
+    if (argc > 1) { // kollar om det finns några argument och sätter det första efter programmets namn som spelarens namn
         user.name = trim(argv[1]);
-    } else {
+    } else { // annars fråga efter spelarens namn
         cout << "What's your name? ";
         string input;
         getline(cin, input);
         user.name = trim(input);
     }
 
-    user.health = 20;
-    user.level = 0;
-    user.currentExp = 0;
+    user.health = 20; // sätter spelarens hit points
+    user.level = 0; // sätter spelarens nivå
+    user.currentExp = 0; // sätter den mängd experience som spelaren börjar med
 
     cout << "Hello " << user.name << ". Let's start your adventure. You start with two potions.\n";
     ClearScreen();
@@ -290,6 +290,7 @@ int main(int argc, char* argv[]) {
         {"Potion", 2}
     };
 
+    // skapar första bossen, som är en orc
     Entity orc;
     orc.name = "Zug Zug the Orc";
     orc.health = 25;
@@ -297,17 +298,18 @@ int main(int argc, char* argv[]) {
     orc.currentExp = 0;
 
     sort(inventory.begin(), inventory.end(), compareItems); // sorterar ens väska
-    BattleEntity(user, orc, inventory);
+    BattleEntity(user, orc, inventory); // startar en strid med första bossen
     ClearScreen();
 
     cout << "You enter a big forest. There's a big bush. You checked the bush and found something.\n";
     ClearScreen();
 
-    AddItem(inventory, "Potion", 5);
+    AddItem(inventory, "Potion", 5); // lägger till fem potions i väskan
     sort(inventory.begin(), inventory.end(), compareItems); // sorterar ens väska
     cout << "As you walk further into the forest, you get ambushed by the Elven King and his army.\n";
     ClearScreen();
 
+    // skapar den andra bossen, som är alvernas kung
     Entity elf;
     elf.name = "Elven King";
     elf.health = 25;
@@ -315,17 +317,18 @@ int main(int argc, char* argv[]) {
     elf.currentExp = 0;
 
     sort(inventory.begin(), inventory.end(), compareItems); // sorterar ens väska
-    BattleEntity(user, elf, inventory);
+    BattleEntity(user, elf, inventory); // startar en strid med alvernas kung
     ClearScreen();
 
     cout << "After facing the Elven King you noticed he dropped 10 greater potions.\n";
-    AddItem(inventory, "Greater Potion", 10);
+    AddItem(inventory, "Greater Potion", 10); // lägger till 10 greater potions i väskan
     sort(inventory.begin(), inventory.end(), compareItems); // sorterar ens väska
     ClearScreen();
 
     cout << "You feel like resting by a tree, but you notice it seems alive, like it can talk.\n";
     ClearScreen();
 
+    // skapar den tredje bossen som är ett vandrande träd (så kallad ent)
     Entity ent;
     ent.name = "Ent";
     ent.health = 30;
@@ -333,7 +336,7 @@ int main(int argc, char* argv[]) {
     ent.currentExp = 0;
 
     sort(inventory.begin(), inventory.end(), compareItems); // sorterar ens väska
-    BattleEntity(user, ent, inventory);
+    BattleEntity(user, ent, inventory); // startar en strid med det vandrande träd
     ClearScreen();
 
     cout << "Congratulations! You finished the game.\n";
