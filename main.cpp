@@ -11,7 +11,7 @@
 #include <cctype> // för att kunna använda tolower()
 #include <vector> // för att kunna använda vectorarrayer
 #include <stdlib.h> // för att kunna använda system("cls")
-//#include <conio.h> // för att kunna använda getch() på Windows
+#include <conio.h> // för att kunna använda getch() på Windows
 #include <algorithm> // för att kunna använda sort()
 
 using namespace std;
@@ -81,10 +81,10 @@ string trim(string input) {
 // funktion som ber användaren att trycka ner en knapp innan skärmen rensas
 void ClearScreen() {
     cout << "Hit a key to proceed.\n";
-    //getch(); // funktion som läser av knapptryck på Windows
-    getchar(); // liknar ovanstående kommando, dock krävs ett tryck av returknappen
-    //system("cls"); // rensar terminalen på Windows
-    system("clear"); // macOS motsvarighet till ovanstående kommando
+    getch(); // funktion som läser av knapptryck på Windows
+    //getchar(); // liknar ovanstående kommando, dock krävs ett tryck av returknappen
+    system("cls"); // rensar terminalen på Windows
+    //system("clear"); // macOS motsvarighet till ovanstående kommando
 }
 
 //ger spelaren en mängd experience
@@ -152,7 +152,7 @@ void UseItem(vector<Item> &itemList, string nameOfItem, Entity &player) {
 
         if (itemList[result].amount == 0) {
             itemList.erase(itemList.begin() + result);
-        }        
+        }
     }
 }
 
