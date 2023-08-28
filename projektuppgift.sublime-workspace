@@ -145,10 +145,10 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Onni/Documents/CPP/projektuppgift/main.cpp",
 		"/Users/onni/Documents/CPP/projektuppgift/main.cpp",
 		"/Users/onni/Library/Application Support/Sublime Text/Packages/User/C++11.sublime-build",
 		"/Users/onni/Library/Application Support/Sublime Text/Packages/C++.sublime-package",
-		"/C/Users/Onni/Documents/CPP/projektuppgift/main.cpp",
 		"/C/Users/Onni/Downloads/mc/brandon och emilio/plugins/GUIShop/config.yml",
 		"/C/Users/Onni/Downloads/mc/brandon och emilio/plugins/GUIShop/shops.yml",
 		"/C/Users/Onni/Downloads/mc/brandon och emilio/plugins/GUIShop/menu.yml",
@@ -277,11 +277,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.371299093656,
 			1.0
 		],
 		"rows":
